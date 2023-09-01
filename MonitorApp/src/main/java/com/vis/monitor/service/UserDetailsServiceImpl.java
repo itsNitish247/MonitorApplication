@@ -25,20 +25,8 @@ public class UserDetailsServiceImpl implements UserDetailsService {
         
     }
 
-//    @Override
-//    public UserDetails addUserDetails(UserDetails userDetails) {
-//        return userDetailsRepository.save(userDetails);
-//    }
-    
-//    @Override
-//    public UserDetails addUserDetails(UserDetails userDetails) {
-//        
-//        IpPort ipPort = userDetails.getIpPort();
-//        IpPort savedIpPort = ipPortRepository.save(ipPort);
-//        userDetails.setIpPort(savedIpPort);
-//
-//        return userDetailsRepository.save(userDetails);
-//    }
+
+   
     
     @Override
     public UserDetails addUserDetails(UserDetails userDetails) {
@@ -64,4 +52,17 @@ public class UserDetailsServiceImpl implements UserDetailsService {
     public void deleteUserDetails(long id) {
         userDetailsRepository.deleteById(id);
     }
-}
+
+
+
+    
+    //delete this 
+    
+	}
+
+
+
+
+
+	
+

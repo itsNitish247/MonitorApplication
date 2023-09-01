@@ -16,4 +16,6 @@ public interface UserDetailsService {
     List<UserDetails> getAllUserDetails();
 
     void deleteUserDetails(long id);
+
+    
 }

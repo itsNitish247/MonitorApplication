@@ -1,9 +1,13 @@
 package com.vis.monitor.scheduler;
 
 import com.vis.monitor.modal.IpPort;
+import com.vis.monitor.modal.UserDetails; // Import UserDetails
 import com.vis.monitor.service.IpPortService;
+import com.vis.monitor.service.UserDetailsService; // Import UserDetailsService
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.mail.SimpleMailMessage;
+import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Component;
 
@@ -18,12 +22,16 @@ public class IpPortScheduler {
     private static final Logger logger = LoggerFactory.getLogger(IpPortScheduler.class);
 
     private final IpPortService ipPortService;
+    private final UserDetailsService userDetailsService; // Inject UserDetailsService
+    private final JavaMailSender javaMailSender;
 
-    public IpPortScheduler(IpPortService ipPortService) {
+    public IpPortScheduler(IpPortService ipPortService, UserDetailsService userDetailsService, JavaMailSender javaMailSender) {
         this.ipPortService = ipPortService;
+        this.userDetailsService = userDetailsService;
+        this.javaMailSender = javaMailSender;
     }
 
-    @Scheduled(fixedRate = 1000) 
+    @Scheduled(fixedRate = 1000)
     public void checkIpPorts() {
         logger.info("Scheduled task to monitor IP and Port started.");
 
@@ -38,6 +46,7 @@ public class IpPortScheduler {
                 logger.info("IP {} and Port {} are reachable.", ipAddress, port);
             } else {
                 logger.warn("IP {} and Port {} are not reachable.", ipAddress, port);
+              
             }
         }
 
@@ -55,4 +64,7 @@ public class IpPortScheduler {
             return false;
         }
     }
+
 }
+
+
